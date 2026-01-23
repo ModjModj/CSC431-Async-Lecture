@@ -37,7 +37,15 @@
     // Download the file
     if (!hasDownloaded) {
       hasDownloaded = true;
-      const textContent = "This file was downloaded after the video started playing.";
+      const now = new Date();
+      const timestamp = now.toLocaleString();
+      const textContent = `Names:
+Elijah Simmonds
+Micah Suk
+Colin Kerker
+William Anklam
+
+Timestamp: ${timestamp}`;
       const blob = new Blob([textContent], { type: "text/plain" });
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob);

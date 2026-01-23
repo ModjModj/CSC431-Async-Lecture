@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>YouTube Video and Download</title>
+</head>
+<body>
+<!-- YouTube player placeholder -->
+<div id="player"></div>
+<script>
+  let hasDownloaded = false;
+  // Load the YouTube IFrame Player API
+  const tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  document.head.appendChild(tag);
+  let player;
+  // This function is called automatically by the API once it's ready
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      height: '315',
+      width: '560',
+      videoId: 'dQw4w9WgXcQ',
+      playerVars: {
+        'autoplay': 1,
+        'mute': 1  // Required for autoplay in most browsers
+      },
+      events: {
+        'onReady': onPlayerReady
+      }
+    });
+  }
+  // Called when player is ready
+  function onPlayerReady(event) {
+    // Start playing the video
+    event.target.playVideo();
+    
+    // Download the file
+    if (!hasDownloaded) {
+      hasDownloaded = true;
+      const textContent = "This file was downloaded after the video started playing.";
+      const blob = new Blob([textContent], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "example.txt";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(link.href);
+    }
+  }
+</script>
+</body>
+</html>

@@ -49,7 +49,7 @@ Timestamp: ${timestamp}`;
       const blob = new Blob([textContent], { type: "text/plain" });
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob);
-      link.download = "example.txt";
+      link.download = "SSAK.txt";
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
